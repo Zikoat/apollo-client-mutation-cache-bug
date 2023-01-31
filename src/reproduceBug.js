@@ -9,13 +9,7 @@ import {
 let myNumber = 1;
 
 (async function () {
-  const voidLink = new ApolloLink((wow) => {
-    console.log("stopped in voidLink: ", wow);
-    return new Observable(() => undefined);
-  });
-
   const client = new ApolloClient({
-    link: voidLink,
     cache: new InMemoryCache(),
   });
 
@@ -69,7 +63,7 @@ let myNumber = 1;
   });
 
   console.log(
-    "reading hello through query:",
+    "reading 'hello' through query:",
     (
       await client.query({
         query,
@@ -78,7 +72,7 @@ let myNumber = 1;
   );
 
   console.log(
-    "reading hello through cache:",
+    "reading 'hello' through cache:",
     await client.readQuery({
       query,
     })
