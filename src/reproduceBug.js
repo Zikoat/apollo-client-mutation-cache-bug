@@ -2,8 +2,6 @@ import {
   ApolloClient,
   InMemoryCache,
   gql,
-  ApolloLink,
-  Observable,
 } from "@apollo/client";
 
 let myNumber = 1;
