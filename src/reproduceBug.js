@@ -1,22 +1,18 @@
-import {
-  ApolloClient,
-  InMemoryCache,
-  gql,
-} from "@apollo/client";
+import { ApolloClient, InMemoryCache, gql, HttpLink } from "@apollo/client";
 
 let myNumber = 1;
 
-(async function () {
-  const client = new ApolloClient({
-    cache: new InMemoryCache(),
-  });
+const query = gql`
+  query {
+    hello
+  }
+`;
 
-  const query = gql`
-    query {
-      hello
-    }
-  `;
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+});
 
+export async function init() {
   client.writeQuery({
     query,
     data: { hello: "world! " + myNumber++ },
@@ -55,6 +51,11 @@ let myNumber = 1;
       console.log("finished mutation");
     });
 
+  await writeCache(client);
+}
+
+export async function writeCache() {
+  console.log("writing to cache");
   client.writeQuery({
     query,
     data: { hello: "world! " + myNumber++ },
@@ -75,4 +76,6 @@ let myNumber = 1;
       query,
     })
   );
-})();
+}
+
+init();

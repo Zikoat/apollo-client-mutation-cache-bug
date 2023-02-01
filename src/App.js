@@ -1,7 +1,11 @@
-import "./reproduceBug";
+import { writeCache } from "./reproduceBug";
+
 function App() {
   return (
-    <div className="App">see console</div>
+    <div>
+      <p>see console</p>
+      <button onClick={writeCache}>write to cache</button>
+    </div>
   );
 }
 
